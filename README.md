@@ -1,20 +1,66 @@
 # Overview
- A lightweight React / Vite based NPM package starter.
+ A lightweight scrollspy library for React projects
 
 ## Prerequisites
 - React
 - Node
 - NPM
-- Yalc
 
-## Quick Start
-- npm install
-- npm start
+## Installation
+```
+npm install @ehubbell/react-scrollspy
+```
+
+## Usage
+Import this project in your `_app.tsx` file and then pass to the `InterfaceProvider` context as shown.
+
+```tsx
+import ScrollSpy from '@ehubbell/react-scrollspy';
+import { useRef } from 'react';
+import { MDXRemote } from 'next-mdx-remote';
+
+import { Col, Container, Grid } from '@playbooks/ui/grid';
+import { AppWrapper } from 'components/app/app-wrapper';
+import { DocSidebar } from 'components/doc/doc-sidebar';
+import { mdxDecorators } from 'decorators';
+
+const DetailPage = ({ ssr, account, router, session, store, toast }) => {
+	const doc = ssr.doc?.data;
+	const ref = useRef(null);
+
+	// Methods
+	const onUpdate = props => console.log('onUpdate: ', props);
+
+	// Render
+	return (
+		<AppWrapper breadcrumbs>
+			<Container size='xl' height='h-full' className='py-4'>
+				<Grid height='h-full'>
+					<Col lg='9' className='markdown'>
+						<ScrollSpy
+							navRef={ref}
+							dataAttribute='scrollspy'
+							offsetTop={100}
+							onUpdate={onUpdate}
+							activeClass='active'
+							debug>
+							<MDXRemote {...doc.content} components={mdxDecorators} />
+						</ScrollSpy>
+					</Col>
+					<Col lg='3' border='md:border-l' className='hidden lg:block'>
+						<DocSidebar ref={ref} doc={doc} />
+					</Col>
+				</Grid>
+			</Container>
+		</AppWrapper>
+	);
+};
+
+export default DetailPage;
+```
 
 ## Development
-- npm link
-- switch to project
-- npm link <package_name>
+This project is setup to use `yalc` for local development.
 
 ## Scripts
 - We've included a couple of helpful scripts for faster development.

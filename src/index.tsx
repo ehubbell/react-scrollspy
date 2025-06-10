@@ -1,7 +1,7 @@
-import { MutableRefObject, ReactNode, useEffect, useRef, useState } from 'react';
+import { ReactNode, RefObject, useEffect, useRef, useState } from 'react';
 
 export interface ScrollSpyProps {
-	navRef?: MutableRefObject<HTMLDivElement | null>;
+	navRef?: RefObject<HTMLDivElement | null>;
 	activeClass?: string;
 	dataAttribute?: string;
 	offsetTop?: number;
@@ -10,6 +10,7 @@ export interface ScrollSpyProps {
 	updateHistory?: boolean;
 	onUpdate?: (id: string) => void;
 	children: ReactNode;
+	debug?: boolean;
 }
 
 const ScrollSpy = ({
@@ -18,9 +19,10 @@ const ScrollSpy = ({
 	dataAttribute = 'scrollspy',
 	offsetTop = 0,
 	offsetBottom = 0,
-	throttle = 300,
+	throttle = 100,
 	updateHistory = true,
 	onUpdate,
+	debug = false,
 	children,
 }: ScrollSpyProps) => {
 	const containerRef = useRef(null);
@@ -52,14 +54,21 @@ const ScrollSpy = ({
 		setTimeout(updateScrollSpy, throttle);
 	}
 
-	function checkVisibility(el: HTMLElement) {
-		const rectInView = el.getBoundingClientRect();
+	function checkVisibility(element: HTMLElement) {
+		const id = element.id;
+		if (!id) return null;
 
-		const useHeight = containerRef?.current ? containerRef?.current.offsetHeight : window.innerHeight;
-		const hitbox_top = useHeight;
-		const element_top = rectInView.top;
-		const element_bottom = rectInView.top + useHeight;
-		return hitbox_top < element_bottom + offsetBottom && hitbox_top > element_top - offsetTop;
+		const rectInView = element.getBoundingClientRect();
+
+		const height = containerRef?.current ? containerRef?.current.offsetHeight : window.innerHeight;
+		const container = height;
+		const elementTop = rectInView.bottom;
+		const elementBottom = rectInView.top + height;
+		const computedTop = elementTop + offsetTop;
+		const computedBottom = elementBottom + offsetBottom;
+		if (debug)
+			console.log('checkVisibility: ', { id, container, elementTop, elementBottom, computedTop, computedBottom });
+		return container < computedBottom && container > computedTop;
 	}
 
 	function updateScrollSpy() {
