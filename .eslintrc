@@ -1,0 +1,58 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+		"plugin:eqeqeq-fix/recommended",
+		"plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "unused-imports",
+    "simple-import-sort"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "ignorePatterns": [
+		"dist",
+		"**/*.cjs",
+		"**/*.js"
+	],
+  "rules": {
+    "eqeqeq": "error",
+    "unused-imports/no-unused-imports": "error",
+    "no-multi-spaces": "error",
+		"no-multiple-empty-lines": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "simple-import-sort/imports": "error",
+		"simple-import-sort/exports": "off"
+  },
+  "overrides": [
+		{
+      "files": [
+				"**/*.js",
+				"**/*.ts",
+				"**/*.tsx",
+				"**.*.css"
+			],
+			"rules": {
+				"simple-import-sort/imports": [
+					"error",
+					{
+						"groups": [
+							[
+								"react",
+								"next"
+							]
+						]
+					}
+				]
+			}
+		}
+	]
+}
