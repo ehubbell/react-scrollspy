@@ -17,33 +17,37 @@ export function pushBuild() {
 	};
 }
 
-export default defineConfig({
-	base: './',
-	build: {
-		sourcemap: true,
-		lib: {
-			entry: path.resolve(__dirname, 'src/index.tsx'),
-			name: 'Scrollspy',
-			formats: ['es', 'cjs'],
-			fileName: format => `index.${format}.js`,
-		},
-		rollupOptions: {
-			external: ['react', 'react-dom'],
-			output: {
-				globals: {
-					react: 'React',
-					'react-dom': 'ReactDOM',
-					'react/jsx-runtime': 'react/jsx-runtime',
-				},
+export default defineConfig(({ mode }) => {
+	const plugins = mode !== 'production' ? [react(), pushBuild()] : [react()];
+
+	return {
+		base: './',
+		build: {
+			sourcemap: true,
+			lib: {
+				entry: path.resolve(__dirname, 'src/index.tsx'),
+				name: 'Scrollspy',
+				formats: ['es', 'cjs'],
+				fileName: format => `index.${format}.js`,
 			},
-			plugins: [peerDepsExternal()],
+			rollupOptions: {
+				external: ['react', 'react-dom'],
+				output: {
+					globals: {
+						react: 'React',
+						'react-dom': 'ReactDOM',
+						'react/jsx-runtime': 'react/jsx-runtime',
+					},
+				},
+				plugins: [peerDepsExternal()],
+			},
 		},
-	},
-	plugins: [react(), pushBuild()],
-	resolve: {
-		alias: {
-			src: path.resolve(__dirname, '/src'),
-			utils: path.resolve(__dirname, '/src/utils'),
+		plugins,
+		resolve: {
+			alias: {
+				src: path.resolve(__dirname, '/src'),
+				utils: path.resolve(__dirname, '/src/utils'),
+			},
 		},
-	},
+	};
 });
