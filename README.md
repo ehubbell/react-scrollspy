@@ -1,10 +1,6 @@
 # Overview
- A lightweight scrollspy library for React projects
-
-## Prerequisites
-- React
-- Node
-- NPM
+A lightweight scrollspy library for React projects.
+We built it to better maintain the state for Scrollspy elements and simplify the code for future management.
 
 ## Installation
 ```
@@ -12,7 +8,10 @@ npm install @ehubbell/react-scrollspy
 ```
 
 ## Usage
-Import this project in your `_app.tsx` file and then pass to the `InterfaceProvider` context as shown.
+Simply wrap your element(s) containing the IDs you want to track with the `<ScrollSpy` component.
+Then, set a `ref` to the parent element containing the navigation elements and pass it into the `ScrollSpy` component.
+This will narrow the document search down to a smaller set of elements for attribute updates.
+Finally, make sure the navigation elements contain the `data-scrollspy` attribute with matching IDs.
 
 ```tsx
 import ScrollSpy from '@ehubbell/react-scrollspy';
@@ -57,6 +56,7 @@ const DetailPage = ({ ssr, account, router, session, store, toast }) => {
 };
 
 export default DetailPage;
+
 ```
 
 ## Development

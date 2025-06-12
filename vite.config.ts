@@ -24,7 +24,7 @@ export default defineConfig({
 		lib: {
 			entry: path.resolve(__dirname, 'src/index.tsx'),
 			name: 'Scrollspy',
-			formats: ['es', 'cjs', 'umd', 'iife'],
+			formats: ['es', 'cjs'],
 			fileName: format => `index.${format}.js`,
 		},
 		rollupOptions: {
