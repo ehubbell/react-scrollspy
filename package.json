@@ -1,6 +1,6 @@
 {
   "name": "@ehubbell/react-scrollspy",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A lightweight scrollspy library for React projects.",
   "author": "Eric Hubbell<eric@erichubbell.com>",
   "license": "ISC",
