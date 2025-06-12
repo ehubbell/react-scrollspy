@@ -10,6 +10,11 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "react",
+    "scrollspy",
+    "react-scrollspy"
+  ],
   "scripts": {
     "dev": "vite build --mode development --watch --minify false",
     "start": "vite build --mode development --minify false",
