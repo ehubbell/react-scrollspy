@@ -1,5 +1,5 @@
 {
-  "name": "@ehubbell/react-scrollspy",
+  "name": "@ehubbell/scrollspy",
   "version": "0.0.4",
   "description": "A lightweight scrollspy library for React projects.",
   "author": "Eric Hubbell<eric@erichubbell.com>",
@@ -7,6 +7,13 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehubbell/scrollspy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ehubbell/scrollspy/issues"
+  },
   "files": [
     "dist"
   ],
@@ -18,7 +25,7 @@
   "scripts": {
     "dev": "vite build --mode development --watch --minify false",
     "start": "vite build --mode development --minify false",
-    "build": "vite build --mode production --minify true",
+    "build": "vite build --mode production --minify true && npm run build:ts",
     "build:ts": "dts-bundle-generator --config dts.config.ts",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
