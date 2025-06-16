@@ -1,10 +1,10 @@
 # Overview
 A lightweight scrollspy library for React projects.
-We built it to better maintain the state for Scrollspy elements and simplify the code for future management.
+We built it to maintain state for Scrollspy elements after they exit the DOM while simplifying the code for future expansion.
 
 ## Installation
 ```
-npm install @ehubbell/react-scrollspy
+npm install @ehubbell/scrollspy
 ```
 
 ## Usage
