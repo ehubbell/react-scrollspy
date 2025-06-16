@@ -60,7 +60,11 @@ export default DetailPage;
 ```
 
 ## Development
-This project is setup to use `yalc` for local development.
+This project uses [yalc](https://npmjs.com/package/yalc) for local development.
+- npm run dev
+- switch to project
+- npx yalc add @ehubbell/scrollspy
+- After that, this library should hot reload into the consuming application
 
 ## Scripts
 - We've included a couple of helpful scripts for faster development.
