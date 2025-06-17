@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
 	return {
 		base: './',
 		build: {
-			sourcemap: true,
+			sourcemap: mode !== 'production',
 			lib: {
 				entry: path.resolve(__dirname, 'src/index.tsx'),
 				name: 'Scrollspy',
